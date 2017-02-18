@@ -504,8 +504,12 @@ oop StringTable::basic_add(int index, Handle string_or_null, jchar* name,
   Handle string;
   // try to reuse the string if possible
   if (!string_or_null.is_null() && (!JavaObjectsInPerm || string_or_null()->is_perm())) {
+	// our `new String() + new String()` will go this way
+	// its reference will be reused, not copied or re-created
+	// i.e. this string, which in string pool, may still on eden space
     string = string_or_null;
   } else {
+	// string literal is default created on tenured area
     string = java_lang_String::create_tenured_from_unicode(name, len, CHECK_NULL);
   }
 
