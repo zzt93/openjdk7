@@ -543,6 +543,7 @@ oop StringTable::lookup(Symbol* symbol) {
 oop StringTable::intern(Handle string_or_null, jchar* name,
                         int len, TRAPS) {
   unsigned int hashValue = java_lang_String::hash_string(name, len);
+  // `the_table` is a fixed-size HashMap<hashcode, string>
   int index = the_table()->hash_to_index(hashValue);
   oop string = the_table()->lookup(index, name, len, hashValue);
 
