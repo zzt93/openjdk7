@@ -135,6 +135,15 @@ SharedHeap::StrongRootsScope::~StrongRootsScope() {
   // nothing particular
 }
 
+/**
+ * find heap gc roots and scan them
+ * @param activate_scope
+ * @param collecting_perm_gen
+ * @param so scan option
+ * @param roots to store all roots except code roots
+ * @param code_roots
+ * @param perm_blk
+ */
 void SharedHeap::process_strong_roots(bool activate_scope,
                                       bool collecting_perm_gen,
                                       ScanningOption so,

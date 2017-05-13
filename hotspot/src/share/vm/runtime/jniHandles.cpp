@@ -389,6 +389,7 @@ void JNIHandleBlock::oops_do(OopClosure* f) {
         // traverse heap pointers only, not deleted handles or free list
         // pointers
         if (value != NULL && Universe::heap()->is_in_reserved(value)) {
+          // this oop can be a gc root
           f->do_oop(root);
         }
       }

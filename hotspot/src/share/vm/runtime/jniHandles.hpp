@@ -109,6 +109,10 @@ class JNIHandles : AllStatic {
 
 // JNI handle blocks holding local/global JNI handles
 
+/**
+ * Abstraction for an array of JNI handle,
+ * can be linked together
+ */
 class JNIHandleBlock : public CHeapObj {
   friend class VMStructs;
   friend class CppInterpreter;

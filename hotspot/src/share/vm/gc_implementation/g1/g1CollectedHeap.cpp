@@ -4705,6 +4705,8 @@ g1_process_strong_roots(bool collecting_perm_gen,
   double ext_roots_start = os::elapsedTime();
   double closure_app_time_sec = 0.0;
 
+  // scan_non_heap_roots is the OopClosure which do mark,
+  // add a buffer layer here
   BufferingOopClosure buf_scan_non_heap_roots(scan_non_heap_roots);
   BufferingOopsInGenClosure buf_scan_perm(scan_perm);
   buf_scan_perm.set_generation(perm_gen());
@@ -4713,6 +4715,7 @@ g1_process_strong_roots(bool collecting_perm_gen,
   // unaligned oop locations.
   CodeBlobToOopClosure eager_scan_code_roots(scan_non_heap_roots, /*do_marking=*/ true);
 
+  // shared by most gc algorithm
   process_strong_roots(false, // no scoping; this is parallel code
                        collecting_perm_gen, so,
                        &buf_scan_non_heap_roots,

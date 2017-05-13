@@ -30,6 +30,7 @@
 #include "runtime/os.hpp"
 #include "utilities/taskqueue.hpp"
 
+
 // A BufferingOops closure tries to separate out the cost of finding roots
 // from the cost of applying closures to them.  It maintains an array of
 // ref-containing locations.  Until the array is full, applying the closure
@@ -44,6 +45,9 @@
 class Generation;
 class HeapRegion;
 
+/**
+ * This class is a wrapper for real OopClosure which handles mark process
+ */
 class BufferingOopClosure: public OopClosure {
 protected:
   enum PrivateConstants {
